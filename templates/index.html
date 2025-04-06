@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Predicción de cáncer de mama</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            text-align: center;
+            margin: 40px;
+            background-color: #f9f9f9;
+        }
+        h1 {
+            color: #333;
+        }
+        form {
+            margin-top: 20px;
+        }
+        input {
+            margin: 8px;
+            padding: 10px;
+            width: 200px;
+            font-size: 14px;
+        }
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+        button {
+            padding: 12px 25px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        img {
+            margin-top: 20px;
+        }
+        .explicacion {
+            background-color: #ffffff;
+            border: 1px solid #ccc;
+            padding: 25px;
+            margin-top: 40px;
+            border-radius: 10px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: left;
+        }
+        .explicacion h2 {
+            color: #444;
+        }
+        .explicacion p {
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <h1>🩺 Predicción de cáncer de mama</h1>
+    <p>Ingrese los valores para predecir si el tumor es <strong>maligno</strong> o <strong>benigno</strong>.</p>
+
+    <form method="post">
+        <label>🧬 Radio del tumor:</label>
+        <input type="number" step="any" name="radio" required>
+
+        <label>🧵 Textura del tumor:</label>
+        <input type="number" step="any" name="textura" required>
+
+        <label>🔬 Simetría del tumor:</label>
+        <input type="number" step="any" name="simetria" required>
+
+        <button type="submit">🔍 Predecir</button>
+    </form>
+
+    {% if resultado %}
+        <h2 style="color: {% if resultado == 'maligno' %}red{% else %}green{% endif %}; margin-top: 30px;">
+            Resultado de la predicción: {{ resultado | capitalize }}
+        </h2>
+        <p><strong>Probabilidad del resultado:</strong> {{ probabilidad }}%</p>
+    {% endif %}
+
+    {% if imagen %}
+        <img src="{{ imagen }}" alt="Visualización de predicción" width="500">
+    {% endif %}
+
+    <div class="explicacion">
+        <h2>🧾 Instrucciones del docente</h2>
+        <p><strong>Caso:</strong> Predicción del tipo de cáncer de mama.</p>
+        <p><strong>Modelo utilizado:</strong> Random Forest.</p>
+        <p><strong>Variables independientes:</strong></p>
+        <ul>
+            <li>🧬 <strong>Radio del tumor</strong></li>
+            <li>🧵 <strong>Textura del tumor</strong></li>
+            <li>🔬 <strong>Simetría del tumor</strong></li>
+        </ul>
+        <p><strong>Variable categórica (objetivo):</strong> Tipo de tumor (0: Benigno, 1: Maligno).</p>
+        <p>El modelo ha sido entrenado utilizando el dataset <strong>Breast Cancer Wisconsin Diagnostic Dataset</strong> incluido en Scikit-Learn. Se utiliza <strong>Random Forest</strong> por su precisión y manejo efectivo de datos con relaciones no lineales.</p>
+        <p>El conjunto de datos fue dividido en <strong>entrenamiento</strong> (80%) y <strong>prueba</strong> (20%).</p>
+        <p>Se muestran los resultados de la predicción, su probabilidad, y una visualización gráfica.</p>
+        <p><strong>Ejemplo de entrada:</strong> [radio, textura, simetría] → [0, 1, 1]</p>
+    </div>
+
+    <footer style="margin-top: 50px;">
+        <p>&copy; 2025 Predicción de cáncer de mama – Diego</p>
+    </footer>
+</body>
+</html>
